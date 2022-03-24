@@ -11,7 +11,7 @@
       <v-row>
         <v-col md="8">
           <v-combobox
-            v-model="inputedDeptno"
+            v-model="input"
             :itmes="items"
             label="부서번호 입력"
             multiple
@@ -21,7 +21,7 @@
           </v-combobox>
         </v-col>
         <v-col md="4">
-          <v-btn>
+          <v-btn @click="getData">
             조회
           </v-btn>
         </v-col>
@@ -45,13 +45,12 @@
   axios.defaults.withCredentials = true;
 
   export default {
-    mounted() {
-      this.getData();
-    },
     data () {
       return {
         keys: [10, 20, 30],
-        inputedDeptno = '',
+        input:'',
+        
+        //inputedDeptno:'',
         headers: [
         { text: '부서번호', value: 'deptno'},
         { text: '사원번호', value: 'empno' },
@@ -70,9 +69,11 @@
     },
     methods: {
       getData() {
+        let searchParam = Number(this.input);
+        //console.log(searchParam)
         axios
           .get('/search', {
-            params: {deptno: this.inputedDeptno}
+            params: {deptno: searchParam}
           })
           .then((res) => {
             //res.json();
@@ -89,18 +90,6 @@
           })
       }
     }
-    
-    /*created(){
-      var res = this;
-      axios.get('/')
-      .then(function(response){
-        console.log(response);
-        res.emps = response.data;
-      })
-      .catch(function(err){
-        console.log(err);
-      })
-    }*/
   }
 </script>
 
