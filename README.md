@@ -9,7 +9,7 @@
 DB : oracle cloud
 
 ## Video(실행 예시)
-![video](https://user-images.githubusercontent.com/86249615/159857543-00ac46f9-fe00-4b9c-812b-14aa0337416b.gif)
+![gitvideo](https://user-images.githubusercontent.com/102285029/159883651-9f3ceeb3-0f47-4a86-b526-c34ec3de03b1.gif)
 
 ## Extra
 준비중..
