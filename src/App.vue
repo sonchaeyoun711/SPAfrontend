@@ -1,28 +1,118 @@
+<!-- App.vue -->
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <v-card>
+      <v-card-text>
+        <h1 class="text-lg-right">직원 조회 사이트</h1>
+      </v-card-text>
+    </v-card>
+
+    <v-container fluid class = "selectbar">
+      <v-row>
+        <v-col md="8">
+          <v-combobox
+            v-model="inputedDeptno"
+            :itmes="items"
+            label="부서번호 입력"
+            multiple
+            outlined
+            dense
+          >
+          </v-combobox>
+        </v-col>
+        <v-col md="4">
+          <v-btn>
+            조회
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    
+    <v-container class="table">
+     <v-data-table
+            style="width: 50%"
+            :headers="headers"
+            :items="emps"
+    ></v-data-table>
+   </v-container>
+  
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import axios from 'axios';
+  axios.defaults.withCredentials = true;
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    mounted() {
+      this.getData();
+    },
+    data () {
+      return {
+        keys: [10, 20, 30],
+        inputedDeptno = '',
+        headers: [
+        { text: '부서번호', value: 'deptno'},
+        { text: '사원번호', value: 'empno' },
+        { text: '사원이름', value: 'ename' },
+        ],
+        emp: {
+          empno: "",
+        },
+        emps:[],
+        items: ['10', '20', '30']
+
+      }
+    },
+    cretaed() {
+      this.getData();
+    },
+    methods: {
+      getData() {
+        axios
+          .get('/search', {
+            params: {deptno: this.inputedDeptno}
+          })
+          .then((res) => {
+            //res.json();
+            console.log(res);
+            this.emps = res.data;
+            //console.log(res.data);
+            //this.emps = res.data.result;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            console.log("final");
+          })
+      }
+    }
+    
+    /*created(){
+      var res = this;
+      axios.get('/')
+      .then(function(response){
+        console.log(response);
+        res.emps = response.data;
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+    }*/
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.selectbar {
+  margin-top: 25px;
+  margin-left: 50px;
 }
+
+.table {
+  margin-top: 25px;
+  margin-left: 50px;
+}
+
 </style>
