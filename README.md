@@ -1,24 +1,15 @@
-# miniapp
+# Simple employee search single page app
 
-## Project setup
-```
-npm install
-```
+## Description
+부서별 직원 리스트를 조회할 수 있는 웹페이지
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Environment
+<br>Backend : Spring boot(stsWorkspace repository.. 한 repository에 정리할 계획)</br>
+<br>Frontend : Vue.js</br>
+DB : oracle cloud
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Video(실행 예시)
+![video](https://user-images.githubusercontent.com/86249615/159857543-00ac46f9-fe00-4b9c-812b-14aa0337416b.gif)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Extra
+준비중..
